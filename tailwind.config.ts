@@ -1,10 +1,9 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 export default {
-  content: [],
+  content: ['./src/**/*.{html,ts,svelte}'],
   theme: {
     extend: {},
   },
   plugins: [],
-} satisfies Config
-
+} satisfies Config;

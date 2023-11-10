@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  a {
+    @apply font-semibold underline decoration-blue-400 decoration-4 hover:decoration-blue-500 active:decoration-blue-600;
+  }
+
+  dl {
+    @apply flex;
+  }
+
+  dt {
+    @apply font-bold p-2 bg-pink-300 rounded-l;
+  }
+
+  dd {
+    @apply p-2 bg-pink-100 rounded-r last:mr-0 mr-2;
+  }
+
+  label {
+    @apply font-semibold;
+  }
+
+  input,
+  button,
+  select {
+    @apply focus:ring-4;
+  }
+
+  input[type='range'] {
+    @apply appearance-none bg-pink-200 h-1 rounded-full w-full accent-cyan-600 focus:ring-0;
+  }
+
+  select {
+    @apply appearance-none bg-yellow-100 p-2 rounded w-full border-2 border-yellow-300 outline-none focus:ring-yellow-200;
+  }
+
+  button {
+    @apply bg-cyan-500 border-2 border-cyan-500 py-2 px-4 rounded text-white font-semibold hover:bg-cyan-600 transition-colors duration-100 active:bg-cyan-700 focus:ring-cyan-200;
+  }
+}
