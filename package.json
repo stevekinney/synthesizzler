@@ -35,6 +35,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"clsx": "^2.0.0"
+		"clsx": "^2.0.0",
+		"face-api.js": "^0.22.2"
 	}
 }
