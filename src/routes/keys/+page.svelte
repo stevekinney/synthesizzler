@@ -1,8 +1,13 @@
 <script lang="ts">
+  import { onDestroy, onMount } from 'svelte';
+
   import { currentNotes } from '$lib/current-notes';
+
   import Keyboard from '$components/keyboard.svelte';
   import Piano from '$components/piano.svelte';
-  import { onDestroy, onMount } from 'svelte';
+  import { notes } from '$lib/notes';
+  import { getOscillator } from './oscillators';
+  import { get } from 'svelte/store';
 
   const pauseOnBlur = () => {
     currentNotes.clear();
@@ -15,13 +20,19 @@
   onDestroy(() => {
     document.removeEventListener('blur', pauseOnBlur);
   });
+
+  $: {
+    for (const note of notes) {
+      getOscillator(note)($currentNotes.includes(note));
+    }
+  }
 </script>
 
 <div
   class="grid grid-cols-1 gap-10 xl:grid-rows-[3rem_auto] lg:grid-cols-[1fr_1fr]"
 >
   <ul class="flex gap-4 lg:col-span-2 items-center">
-    <h2 class="font-semibold">Current Notes</h2>
+    <p class="font-semibold">Current Notes</p>
     {#each $currentNotes as note}
       <li class="px-4 py-2 border-2 rounded border-yellow-300 bg-yellow-100">
         {note}

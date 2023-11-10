@@ -12,6 +12,9 @@
       <li>
         <Link href="/keys">Keys</Link>
       </li>
+      <li>
+        <Link href="/theremin">Theremin</Link>
+      </li>
     </ul>
   </nav>
   <slot />
