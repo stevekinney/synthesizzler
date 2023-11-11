@@ -1,12 +1,15 @@
 <script lang="ts">
-  import { createOscillator } from '$lib/create-oscillator';
+  const context = new AudioContext();
+  const volume = context.createGain();
 
-  let context: AudioContext;
+  volume.connect(context.destination);
+
   let oscillator: OscillatorNode | null;
 
   let frequency = 440;
   let detune = 0;
   let waveType: OscillatorType = 'sine';
+  let volumeLevel = 0.5;
 
   $: if (oscillator) {
     oscillator.frequency.value = frequency;
@@ -14,16 +17,24 @@
     oscillator.type = waveType;
   }
 
-  let playPause = () => {
-    if (!context) context = new AudioContext();
-    if (oscillator) return oscillator.stop();
+  $: volume.gain.value = volumeLevel;
 
-    oscillator = createOscillator(context);
+  const stop = () => {
+    if (oscillator) {
+      oscillator.stop();
+      oscillator = null;
+    }
+  };
+
+  let playPause = () => {
+    if (oscillator) return stop();
+
+    oscillator = context.createOscillator();
 
     oscillator.type = waveType;
     oscillator.frequency.value = frequency;
 
-    oscillator.connect(context.destination);
+    oscillator.connect(volume);
     oscillator.start();
   };
 </script>
@@ -52,6 +63,20 @@
   <p>
     <label for="detune">Detune <span class="font-thin">({detune})</span></label>
     <input id="detune" type="range" bind:value={detune} min={-100} max={100} />
+  </p>
+
+  <p>
+    <label for="volume">
+      Volume <span class="font-thin">({volumeLevel})</span>
+    </label>
+    <input
+      id="volume"
+      type="range"
+      bind:value={volumeLevel}
+      min={0}
+      max={1}
+      step={0.25}
+    />
   </p>
 
   <p>
