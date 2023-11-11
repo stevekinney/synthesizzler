@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { CurrentNotes } from '$lib/current-notes';
+  import type { Synthesizer } from '../routes/keys/create-synthesizer';
   import { isNote } from '$lib/notes';
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
 
-  export let currentNotes: CurrentNotes;
+  export let currentNotes: Synthesizer;
 
   const getNoteForElement = (element: HTMLElement): Note | undefined => {
     const note = element.dataset.note;

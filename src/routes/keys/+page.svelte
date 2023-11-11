@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
+  import { createSynthesizer } from './create-synthesizer';
 
-  import { currentNotes } from '$lib/current-notes';
+  const context = new AudioContext();
+
+  const currentNotes = createSynthesizer(context);
 
   import Keyboard from '$components/keyboard.svelte';
   import Piano from '$components/piano.svelte';
-  import { notes } from '$lib/notes';
-  import { getOscillator } from './oscillators';
-  import { get } from 'svelte/store';
 
   const pauseOnBlur = () => {
     currentNotes.clear();
@@ -20,12 +20,6 @@
   onDestroy(() => {
     document.removeEventListener('blur', pauseOnBlur);
   });
-
-  $: {
-    for (const note of notes) {
-      getOscillator(note)($currentNotes.includes(note));
-    }
-  }
 </script>
 
 <div

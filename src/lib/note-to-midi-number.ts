@@ -1,4 +1,4 @@
-import { isNote } from './notes';
+import { toNoteAndOctave } from './notes';
 
 const notesToSemitones: Readonly<Record<Note, number>> = {
   C: 0,
@@ -20,21 +20,10 @@ const notesToSemitones: Readonly<Record<Note, number>> = {
   B: 11,
 } as const;
 
-export function noteToMIDINumber(note: NoteWithOctave) {
-  // Extract the note and octave from the input
-  const match = note.match(/([A-G#b]+)(\d+)/);
+export function noteToMIDINumber(note: NoteWithOctave): number {
+  const { note: noteName, octave } = toNoteAndOctave(note);
 
-  if (!match) {
-    throw new Error('Invalid note format');
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, noteName, octave] = match;
-
-  if (!isNote(noteName)) return;
-
-  const midiNumber =
-    (parseInt(octave, 10) + 1) * 12 + notesToSemitones[noteName];
+  const midiNumber = (octave + 1) * 12 + notesToSemitones[noteName];
 
   return midiNumber;
 }

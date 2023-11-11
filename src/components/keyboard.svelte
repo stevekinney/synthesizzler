@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type { CurrentNotes } from '$lib/current-notes';
+  import type { Synthesizer } from '../routes/keys/create-synthesizer';
   import { isNote } from '$lib/notes';
   import { onMount, onDestroy } from 'svelte';
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
 
-  export let currentNotes: CurrentNotes;
+  export let currentNotes: Synthesizer;
 
   const pause = (event: KeyboardEvent) => {
     const note = getNoteForKey(event.key);
