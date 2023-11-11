@@ -1,4 +1,4 @@
-import { toNoteAndOctave } from './notes';
+import { notesWithOctaves, parseNoteAndOctave } from './notes';
 
 const notesToSemitones: Readonly<Record<Note, number>> = {
   C: 0,
@@ -20,10 +20,33 @@ const notesToSemitones: Readonly<Record<Note, number>> = {
   B: 11,
 } as const;
 
-export function noteToMIDINumber(note: NoteWithOctave): number {
-  const { note: noteName, octave } = toNoteAndOctave(note);
+export const noteToMidiNumber = (note: NoteWithOctave): number => {
+  const { note: noteName, octave } = parseNoteAndOctave(note);
 
   const midiNumber = (octave + 1) * 12 + notesToSemitones[noteName];
 
   return midiNumber;
-}
+};
+
+export const noteFromMidiNumber = (midiNumber: number): NoteWithOctave => {
+  const octave = Math.floor(midiNumber / 12) - 1;
+  const note = midiNumber % 12;
+
+  const noteName = Object.keys(notesToSemitones).find(
+    (n) => notesToSemitones[n as Note] === note,
+  ) as Note;
+
+  return `${noteName}${octave}` as NoteWithOctave;
+};
+
+export const midiNumbersToNotes = () => {
+  const result: Record<number, NoteWithOctave[]> = {};
+
+  for (const note of notesWithOctaves) {
+    const midiNumber = noteToMidiNumber(note);
+    if (!result[midiNumber]) result[midiNumber] = [];
+    result[midiNumber].push(note);
+  }
+
+  return Object.entries(result);
+};

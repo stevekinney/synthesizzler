@@ -3,9 +3,7 @@
   import * as faceapi from 'face-api.js';
 
   import { getCenterOfFace, rankExpressions } from './get-measurements';
-  import { createOscillator } from '$lib/create-oscillator';
-  import { createPanner } from '$lib/create-panner';
-  import { mapRange, mapVideoToPannerRange } from '$lib/map-range';
+  import { mapRange } from '$lib/map-range';
 
   let interval: NodeJS.Timeout;
 
@@ -67,13 +65,11 @@
 
     faceapi.matchDimensions(canvas, displaySize);
 
-    const panner = createPanner(context);
     const gain = context.createGain();
 
-    oscillator = createOscillator(context);
+    oscillator = context.createOscillator();
 
-    oscillator.connect(panner);
-    panner.connect(gain);
+    oscillator.connect(gain);
     gain.connect(context.destination);
 
     oscillator.start();
@@ -97,14 +93,10 @@
       expression = rankExpressions(firstFace);
 
       if (oscillator && x && y) {
-        const pannerValue = mapVideoToPannerRange(x);
         const gainValue = mapRange(y, 0, height, 0, 1);
-
-        console.log({ pannerValue, gainValue });
 
         oscillator.frequency.value = x;
 
-        panner.pan.setValueAtTime(pannerValue, context.currentTime);
         gain.gain.setValueAtTime(gainValue, context.currentTime);
       }
 

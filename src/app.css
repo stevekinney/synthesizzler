@@ -51,6 +51,27 @@
     @apply font-semibold;
   }
 
+  table {
+    @apply border-collapse border-2 border-slate-400 w-full;
+  }
+
+  th,
+  td {
+    @apply p-2 text-left;
+  }
+
+  thead {
+    @apply bg-slate-300 border-b-4 border-slate-400;
+  }
+
+  th {
+    @apply font-semibold bg-slate-300;
+  }
+
+  tr {
+    @apply bg-slate-50 even:bg-slate-100;
+  }
+
   input,
   button,
   select {

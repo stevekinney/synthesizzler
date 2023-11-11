@@ -15,6 +15,9 @@
       <li>
         <Link href="/theremin">Theremin</Link>
       </li>
+      <li>
+        <Link href="/notes">Notes</Link>
+      </li>
     </ul>
   </nav>
   <slot />

@@ -1,4 +1,4 @@
-import { noteToMIDINumber } from './note-to-midi-number';
+import { noteToMidiNumber } from './note-to-midi-number';
 import { isNoteWithOctave, toNoteWithOctave } from './notes';
 
 const A4 = 440;
@@ -15,7 +15,7 @@ export function getFrequency(
     ? noteOrNoteWithOctave
     : toNoteWithOctave(noteOrNoteWithOctave, octave || 3);
 
-  const noteNumber = noteToMIDINumber(note);
+  const noteNumber = noteToMidiNumber(note);
 
   return A4 * Math.pow(TWELFTH_ROOT_OF_TWO, noteNumber - A4_NOTE_NUMBER);
 }
