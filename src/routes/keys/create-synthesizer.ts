@@ -3,24 +3,41 @@ import { getFrequency } from '../../lib/get-frequency-for-note';
 
 export type Synthesizer = ReturnType<typeof createSynthesizer>;
 
+type OscillatorAndGain = {
+  oscillator: OscillatorNode;
+  gain: GainNode;
+};
+
 const startOscillator = (
   context: AudioContext,
   note: Note,
   octave: Octave,
-): OscillatorNode => {
+): OscillatorAndGain => {
   const oscillator = context.createOscillator();
+  const gain = context.createGain();
 
   oscillator.frequency.value = getFrequency(note, octave);
+  gain.gain.value = 0.01;
 
-  oscillator.connect(context.destination);
+  oscillator.connect(gain);
+  gain.connect(context.destination);
+
+  gain.gain.linearRampToValueAtTime(1, context.currentTime + 0.1);
   oscillator.start();
 
-  return oscillator;
+  return { oscillator, gain };
 };
 
-const stopOscillator = (oscillator: OscillatorNode): null => {
-  oscillator.stop();
-  oscillator.disconnect();
+const stopOscillator = (
+  context: AudioContext,
+  { oscillator, gain }: OscillatorAndGain,
+): null => {
+  const duration = 0.3;
+  const endTime = context.currentTime + duration;
+
+  gain.gain.linearRampToValueAtTime(0.001, endTime);
+  oscillator.stop(endTime);
+
   return null;
 };
 
@@ -28,7 +45,7 @@ export const createSynthesizer = (
   context: AudioContext,
   octave: Octave = 4,
 ) => {
-  const notes = writable<Partial<Record<Note, OscillatorNode | null>>>({});
+  const notes = writable<Partial<Record<Note, OscillatorAndGain | null>>>({});
 
   const add = (note: Note) => {
     notes.update((currentNotes) => {
@@ -51,7 +68,7 @@ export const createSynthesizer = (
 
       return {
         ...currentNotes,
-        [note]: stopOscillator(oscillator),
+        [note]: stopOscillator(context, oscillator),
       };
     });
   };
@@ -59,7 +76,7 @@ export const createSynthesizer = (
   const clear = () => {
     notes.update((currentNotes) => {
       Object.values(currentNotes).forEach((oscillator) => {
-        if (oscillator) stopOscillator(oscillator);
+        if (oscillator) stopOscillator(context, oscillator);
       });
 
       return {};

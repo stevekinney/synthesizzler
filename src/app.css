@@ -36,15 +36,15 @@
   }
 
   dl {
-    @apply flex;
+    @apply flex flex-col md:flex-row;
   }
 
   dt {
-    @apply font-bold p-2 bg-pink-300 rounded-l;
+    @apply font-bold py-2 px-4 bg-pink-300 rounded-t-md md:rounded-t-none md:rounded-l-md;
   }
 
   dd {
-    @apply p-2 bg-pink-100 rounded-r last:mr-0 mr-2;
+    @apply py-2 px-4 bg-pink-100 rounded-b-md md:last:mr-0 md:mr-2 mb-2 md:rounded-b-none md:rounded-r-md md:mb-0;
   }
 
   label {
@@ -78,8 +78,12 @@
     @apply focus:ring-4;
   }
 
+  input {
+    @apply border-2 rounded pl-2 bg-yellow-50 focus:bg-yellow-100 border-yellow-200 invalid:border-red-700 invalid:bg-red-300;
+  }
+
   input[type='range'] {
-    @apply appearance-none bg-pink-200 h-1 rounded-full w-full accent-cyan-600 focus:ring-0;
+    @apply appearance-none bg-pink-200 h-1 rounded-full w-full accent-cyan-600 border-pink-200 focus:ring-0;
   }
 
   select {

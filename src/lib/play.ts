@@ -8,6 +8,7 @@ type PlayOptions = {
 export const playFrequency = (
   context: AudioContext,
   frequency: number,
+  startTime: number = context.currentTime,
   { duration = 1, waveType = 'sine' }: PlayOptions = {},
 ) => {
   const oscillator = context.createOscillator();
@@ -19,20 +20,21 @@ export const playFrequency = (
   oscillator.type = waveType;
   oscillator.frequency.value = frequency;
 
-  gain.gain.setValueAtTime(0, context.currentTime);
-  gain.gain.linearRampToValueAtTime(1, context.currentTime + duration / 100);
+  gain.gain.setValueAtTime(0, startTime);
+  gain.gain.linearRampToValueAtTime(1, startTime + duration / 100);
 
-  oscillator.start();
-  gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + duration);
+  gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
 
-  oscillator.stop(context.currentTime + duration);
+  oscillator.start(startTime);
+  oscillator.stop(startTime + duration + 0.05);
 };
 
 export const playNote = (
   context: AudioContext,
   note: NoteWithOctave,
+  time: number = context.currentTime,
   options: PlayOptions = {},
 ) => {
   const frequency = getFrequency(note);
-  playFrequency(context, frequency, options);
+  playFrequency(context, frequency, time, options);
 };

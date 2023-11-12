@@ -4,8 +4,8 @@
 </script>
 
 <div class="container mx-auto my-10 px-4 md:px-2 lg:px-0">
-  <nav class="mb-10 bg-blue-50 py-2 px-4 border-2 border-blue-200 rounded">
-    <ul class="flex space-x-4">
+  <nav class="my-10 rounded">
+    <ul class="flex flex-wrap gap-2 items-center">
       <li>
         <Link href="/oscillator">Oscillator</Link>
       </li>
@@ -16,7 +16,13 @@
         <Link href="/theremin">Theremin</Link>
       </li>
       <li>
+        <Link href="/step-sequencer">Sequencer</Link>
+      </li>
+      <li>
         <Link href="/notes">Notes</Link>
+      </li>
+      <li>
+        <Link href="/metronome">Metronome</Link>
       </li>
     </ul>
   </nav>

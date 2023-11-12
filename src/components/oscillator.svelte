@@ -1,4 +1,8 @@
 <script lang="ts">
+  import Select from './select.svelte';
+  import Slider from './slider.svelte';
+  import ToggleButton from './toggle-button.svelte';
+
   const context = new AudioContext();
   const volume = context.createGain();
 
@@ -47,54 +51,28 @@
     <dd>{frequency}</dd>
   </dl>
 
-  <p>
-    <label for="frequency"
-      >Frequency <span class="font-thin">({frequency})</span></label
-    >
-    <input
-      id="frequency"
-      type="range"
-      bind:value={frequency}
-      min={110}
-      max={880}
-    />
-  </p>
+  <Slider label="Frequency" bind:value={frequency} min={220} max={880} />
+  <Slider label="Detune" bind:value={detune} min={-100} max={100} />
+  <Slider
+    label="Volume"
+    bind:value={volumeLevel}
+    min={0.01}
+    max={1}
+    step={0.01}
+  />
 
-  <p>
-    <label for="detune">Detune <span class="font-thin">({detune})</span></label>
-    <input id="detune" type="range" bind:value={detune} min={-100} max={100} />
-  </p>
+  <Select label="Wave Type" bind:value={waveType}>
+    <option value="sine">Sine</option>
+    <option value="square">Square</option>
+    <option value="sawtooth">Sawtooth</option>
+    <option value="triangle">Triangle</option>
+  </Select>
 
-  <p>
-    <label for="volume">
-      Volume <span class="font-thin">({volumeLevel})</span>
-    </label>
-    <input
-      id="volume"
-      type="range"
-      bind:value={volumeLevel}
-      min={0}
-      max={1}
-      step={0.25}
-    />
-  </p>
-
-  <p>
-    <label for="wave-type">Wave Type</label>
-    <select id="wave-type" bind:value={waveType}>
-      <option value="sine">Sine</option>
-      <option value="square">Square</option>
-      <option value="sawtooth">Sawtooth</option>
-      <option value="triangle">Triangle</option>
-    </select>
-  </p>
-
-  <button
+  <ToggleButton
     class="w-full"
-    role="switch"
-    aria-checked={!!oscillator}
+    on="Play"
+    off="Pause"
+    condition={!!oscillator}
     on:click={playPause}
-  >
-    {oscillator ? 'Pause' : 'Play'}
-  </button>
+  />
 </div>

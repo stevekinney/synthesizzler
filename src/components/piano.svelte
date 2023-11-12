@@ -35,6 +35,10 @@
     if (event.type === 'keydown') {
       event.target?.addEventListener('keyup', pause);
     }
+
+    if (event.type === 'touchstart') {
+      event.target?.addEventListener('touchend', pause);
+    }
   };
 
   const pauseNote = (event: Event) => {
@@ -51,6 +55,7 @@
     data-note="B"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
@@ -61,6 +66,7 @@
     data-note="A"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
@@ -71,6 +77,7 @@
     data-note="G"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
@@ -81,6 +88,7 @@
     data-note="F"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
@@ -91,6 +99,7 @@
     data-note="E"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
@@ -101,6 +110,7 @@
     data-note="D"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
@@ -111,6 +121,7 @@
     data-note="C"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
@@ -121,6 +132,7 @@
     data-note="A#"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
@@ -131,6 +143,7 @@
     data-note="G#"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
@@ -141,6 +154,7 @@
     data-note="F#"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
@@ -151,6 +165,7 @@
     data-note="D#"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
@@ -161,6 +176,7 @@
     data-note="C#"
     on:mousedown={playNote}
     on:keydown={playNote}
+    on:touchstart={playNote}
     role="button"
     tabindex="0"
   />
