@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { getAccidentalForNote, getAccidentalsForKey } from './keys';
+import {
+  getAccidentalForNote,
+  getAccidentalsForKey,
+  getFlatForNote,
+  getSharpForNote,
+} from './keys';
+
 describe('getAccidentalsForKey', () => {
   it('returns empty array for invalid key', () => {
     expect(getAccidentalsForKey('X' as Note)).toEqual([]);
@@ -56,6 +62,34 @@ describe('getAccidentalsForKey', () => {
   });
 });
 
+describe('getSharpForNote', () => {
+  it('returns a natural note neither sharp nor flat', () => {
+    expect(getSharpForNote('C')).toEqual('C');
+  });
+
+  it('returns a sharp note for a sharp note', () => {
+    expect(getSharpForNote('C#')).toEqual('C#');
+  });
+
+  it('returns a sharp note for a flat note', () => {
+    expect(getSharpForNote('Db')).toEqual('C#');
+  });
+});
+
+describe('getFlatForNote', () => {
+  it('returns a natural note neither sharp nor flat', () => {
+    expect(getFlatForNote('C')).toEqual('C');
+  });
+
+  it('returns a flat note for a sharp note', () => {
+    expect(getFlatForNote('C#')).toEqual('Db');
+  });
+
+  it('returns a flat note for a flat note', () => {
+    expect(getFlatForNote('Db')).toEqual('Db');
+  });
+});
+
 describe('getAccidentalForNote', () => {
   it('returns a natural note neither sharp nor flat', () => {
     expect(getAccidentalForNote('C', 'C')).toEqual('C');
@@ -72,5 +106,10 @@ describe('getAccidentalForNote', () => {
   it('returns a natural note for a flat key', () => {
     expect(getAccidentalForNote('F', 'C')).toEqual('C');
     expect(getAccidentalForNote('C#', 'Ab')).toEqual('G#');
+  });
+
+  it('returns a natural note for a sharp key', () => {
+    expect(getAccidentalForNote('G', 'C')).toEqual('C');
+    expect(getAccidentalForNote('C#', 'F#')).toEqual('F#');
   });
 });

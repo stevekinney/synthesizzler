@@ -93,7 +93,7 @@
       expression = rankExpressions(firstFace);
 
       if (oscillator && x && y) {
-        const gainValue = mapRange(y, 0, height, 0, 1);
+        const gainValue = mapRange(y, [0, height], [0, 1]);
 
         oscillator.frequency.value = x;
 

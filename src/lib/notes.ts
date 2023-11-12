@@ -64,3 +64,15 @@ export const parseNoteAndOctave = (
   const octave = parseInt(noteWithOctave.slice(-1), 10) as Octave;
   return { note, octave };
 };
+
+export const isNaturalNote = (note: Note): boolean => {
+  return note.length === 1;
+};
+
+export const isSharpNote = (note: Note): boolean => {
+  return note.length === 2 && note[1] === '#';
+};
+
+export const isFlatNote = (note: Note): boolean => {
+  return note.length === 2 && note[1] === 'b';
+};

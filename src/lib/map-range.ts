@@ -1,10 +1,12 @@
+type Range = [number, number];
+
 export const mapRange = (
   value: number,
-  min: number,
-  max: number,
-  targetMin: number,
-  targetMax: number,
+  original: Range,
+  target: Range,
 ): number => {
-  const normalized = (value - min) / (max - min);
+  const [minimum, maximum] = original;
+  const [targetMin, targetMax] = target;
+  const normalized = (value - minimum) / (maximum - minimum);
   return normalized * (targetMax - targetMin) + targetMin;
 };

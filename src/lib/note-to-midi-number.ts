@@ -1,3 +1,4 @@
+import { getAccidentalForNote } from './keys';
 import { notesWithOctaves, parseNoteAndOctave } from './notes';
 
 const notesToSemitones: Readonly<Record<Note, number>> = {
@@ -28,6 +29,12 @@ export const noteToSemitone = (note: Note): number => {
   return notesToSemitones[note];
 };
 
+export const notesForSemitone = (semitone: number): Note[] => {
+  return Object.keys(notesToSemitones).filter(
+    (n) => notesToSemitones[n as Note] === semitone,
+  ) as Note[];
+};
+
 export const noteToMidiNumber = (note: NoteWithOctave): number => {
   const { note: noteName, octave } = parseNoteAndOctave(note);
 
@@ -36,7 +43,10 @@ export const noteToMidiNumber = (note: NoteWithOctave): number => {
   return midiNumber;
 };
 
-export const noteFromMidiNumber = (midiNumber: number): NoteWithOctave => {
+export const noteFromMidiNumber = (
+  midiNumber: number,
+  key: Note = 'C',
+): NoteWithOctave => {
   const octave = Math.floor(midiNumber / 12) - 1;
   const note = midiNumber % 12;
 
@@ -44,7 +54,7 @@ export const noteFromMidiNumber = (midiNumber: number): NoteWithOctave => {
     (n) => notesToSemitones[n as Note] === note,
   ) as Note;
 
-  return `${noteName}${octave}` as NoteWithOctave;
+  return `${getAccidentalForNote(noteName, key)}${octave}` as NoteWithOctave;
 };
 
 export const midiNumbersToNotes = () => {
