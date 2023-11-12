@@ -1,6 +1,7 @@
 <script lang="ts">
   import { playNote } from '$lib/play';
   import { repeat } from '$lib/repeat';
+  import { Clock } from '$lib/clock';
 
   import Slider from '$components/slider.svelte';
   import ToggleButton from '$components/toggle-button.svelte';
@@ -13,46 +14,42 @@
   let beatsPerMinute = 120;
   let beatsPerMeasure = 4;
 
-  let interval: NodeJS.Timeout;
-
-  $: secondsPerBeat = 60 / beatsPerMinute;
-
   const start = () => {
-    currentBeat = 0;
-    isPlaying = !isPlaying;
-    playSound();
+    clock.start();
+    currentBeat = clock.currentBeat;
+    isPlaying = clock.on;
   };
 
   const stop = () => {
-    clearTimeout(interval);
-    isPlaying = !isPlaying;
+    clock.stop();
+    isPlaying = clock.on;
+    currentBeat = clock.currentBeat;
   };
 
-  const playSound = (scheduledTime = context.currentTime) => {
-    currentBeat = ++currentBeat <= 4 ? currentBeat : 1;
-
-    const note = currentBeat === 1 ? 'C5' : 'C4';
+  const playSound = (beat: number, scheduledTime = context.currentTime) => {
+    const note = beat === 1 ? 'C5' : 'C4';
+    currentBeat = beat;
 
     playNote(context, note, scheduledTime, {
       duration: 0.1,
     });
-
-    if (isPlaying) {
-      const nextBeatTime = scheduledTime + secondsPerBeat;
-
-      interval = setTimeout(() => {
-        playSound(nextBeatTime);
-      }, (nextBeatTime - context.currentTime) * 1000);
-    }
   };
+
+  const clock = new Clock(context, playSound, {
+    beatsPerMinute,
+    beatsPerMeasure,
+  });
+
+  $: {
+    clock.beatsPerMinute = beatsPerMinute;
+    clock.beatsPerMeasure = beatsPerMeasure;
+  }
 </script>
 
 <div class="space-y-6">
   <dl>
     <dt>Playing</dt>
     <dd>{isPlaying ? 'Yes' : 'No'}</dd>
-    <dt>Seconds Per Beat</dt>
-    <dd>{secondsPerBeat}</dd>
     <dt>Current Beat</dt>
     <dd>{currentBeat}</dd>
   </dl>
