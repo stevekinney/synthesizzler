@@ -1,20 +1,107 @@
 <script lang="ts">
-  import { repeat } from '$lib/repeat';
+  import { produce } from 'immer';
 
-  const measures = 4;
+  import ToggleButton from '$components/toggle-button.svelte';
+  import { Clock } from '$lib/clock';
+  import { playNote } from '$lib/play';
+
+  const notes: { note: NoteWithOctave; active: boolean }[] = [
+    { note: 'A5', active: false },
+    { note: 'G5', active: false },
+    { note: 'E5', active: false },
+    { note: 'C5', active: false },
+    { note: 'A4', active: false },
+    { note: 'G4', active: false },
+    { note: 'E4', active: false },
+    { note: 'C4', active: false },
+    { note: 'A3', active: false },
+    { note: 'G3', active: false },
+    { note: 'E3', active: false },
+    { note: 'C3', active: false },
+  ];
+
+  let isPlaying = false;
+  let currentBeat = 0;
+
+  let sequence = Array.from({ length: 16 }, (_, i) => {
+    return notes;
+  });
+
+  const context = new AudioContext();
+
+  const clock = new Clock(context, tick, {
+    beatsPerMinute: 120,
+    beatsPerMeasure: sequence.length,
+  });
+
+  const start = () => {
+    clock.start();
+    isPlaying = true;
+  };
+
+  const stop = () => {
+    clock.stop();
+    isPlaying = false;
+    currentBeat = 0;
+  };
+
+  console.log(sequence);
+
+  function tick(beat: number) {
+    currentBeat = beat;
+    const currentStep = sequence[beat - 1];
+    for (const { active, note } of currentStep) {
+      if (active) {
+        playNote(context, note, context.currentTime, {
+          duration: clock.secondsPerBeat,
+        });
+      }
+    }
+  }
+
+  function handleClick(step: number, note: number) {
+    sequence = produce(sequence, (draft) => {
+      draft[step][note].active = !draft[step][note].active;
+    });
+  }
 </script>
 
-<div class="flex gap-4 w-full justify-evenly">
-  {#each repeat(measures) as i}
-    <div>
-      <h3>Measure {i}</h3>
-      <div class="grid grid-cols-4">
-        {#each repeat(4) as j}
-          <div class="flex flex-col items-center">
-            <button class="w-10 h-10 rounded-full bg-blue-200">{j}</button>
-          </div>
+<svelte:head>
+  <title>Step Sequencer</title>
+</svelte:head>
+
+<div class="mb-10">
+  <ToggleButton
+    on="Play"
+    off="Stop"
+    condition={isPlaying}
+    on:click={isPlaying ? stop : start}
+  />
+</div>
+
+<div class="snap-mandatory snap-y h-screen md:h-fit overflow-y-auto">
+  <div class="grid grid-flow-col md:gap-2 gap-1 snap-start snap-always">
+    {#each sequence as step, s}
+      <div
+        class="flex flex-col md:gap-2 gap-1 md:p-1 py-1 rounded"
+        class:bg-yellow-400={s + 1 === currentBeat}
+      >
+        {#each step as button, b}
+          <button
+            on:click={() => handleClick(s, b)}
+            class="p-0 font-normal text-xs md:text-sm bg-purple-200 text-purple-700 border-purple-600 hover:bg-purple-300"
+            class:active={button.active}
+          >
+            {button.note}
+          </button>
         {/each}
       </div>
-    </div>
-  {/each}
+    {/each}
+  </div>
 </div>
+
+<style lang="postcss">
+  .active {
+    @apply bg-pink-600 border-pink-800 text-white hover:bg-pink-500 ring-pink-200;
+  }
+</style>

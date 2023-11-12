@@ -4,6 +4,7 @@
 
   import { getCenterOfFace, rankExpressions } from './get-measurements';
   import { mapRange } from '$lib/map-range';
+  import ToggleButton from '$components/toggle-button.svelte';
 
   let interval: NodeJS.Timeout;
 
@@ -53,8 +54,13 @@
   };
 
   const onLoad = () => {
-    width = video.videoWidth;
-    height = video.videoHeight;
+    const container = document.getElementById('playground');
+
+    const aspectRatio = video.videoHeight / video.videoWidth;
+    width = container
+      ? Math.min(video.videoWidth, container.clientWidth)
+      : video.videoWidth;
+    height = width * aspectRatio;
 
     video.play();
     play();
@@ -111,8 +117,8 @@
   <title>Face Theremin</title>
 </svelte:head>
 
-<div class="grid lg:grid-cols-2 gap-8">
-  <article>
+<div class="grid xl:grid-cols-2 gap-8" id="playground">
+  <article class="space-y-4">
     <h2>Face Theremin</h2>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis varius, nibh
@@ -129,11 +135,27 @@
       Donec dignissim, est nec sagittis eleifend, odio ex faucibus lorem, ac
       gravida nisl urna in lorem.
     </p>
+    <div>
+      <ToggleButton
+        on="▶️ Play"
+        off="✋ Stop"
+        condition={!!userMedia}
+        on:click={userMedia ? stopVideo : startVideo}
+      />
+    </div>
+    <dl class="items-end" class:invisible={!userMedia}>
+      <dt>X</dt>
+      <dd>{x && Math.round(x)}</dd>
+      <dt>Y</dt>
+      <dd>{y && Math.round(y)}</dd>
+      <dt>Expression</dt>
+      <dd>{expression}</dd>
+    </dl>
   </article>
 
   <div
-    class="relative flex items-center justify-center bg-indigo-100 rounded-xl shadow-xl row-span-2 place-self-end"
-    style="width: {width}px; height: {height}px"
+    class="relative flex items-center justify-center bg-indigo-100 rounded-xl shadow-xl row-span-2 place-self-end mx-auto"
+    style="width: {width}px; height: {height}px;"
   >
     <p>Press the <strong>Play</strong> button to get started.</p>
     <video
@@ -151,20 +173,5 @@
       {height}
       bind:this={canvas}
     />
-  </div>
-
-  <div class="space-y-4">
-    <div>
-      <button on:click={startVideo} disabled={!!userMedia}>▶ Play</button>
-      <button on:click={stopVideo} disabled={!userMedia}>Stop</button>
-    </div>
-    <dl class="items-end" class:invisible={!userMedia}>
-      <dt>X</dt>
-      <dd>{x && Math.round(x)}</dd>
-      <dt>Y</dt>
-      <dd>{y && Math.round(y)}</dd>
-      <dt>Expression</dt>
-      <dd>{expression}</dd>
-    </dl>
   </div>
 </div>

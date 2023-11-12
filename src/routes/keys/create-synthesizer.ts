@@ -32,11 +32,8 @@ const stopOscillator = (
   context: AudioContext,
   { oscillator, gain }: OscillatorAndGain,
 ): null => {
-  const duration = 0.3;
-  const endTime = context.currentTime + duration;
-
-  gain.gain.linearRampToValueAtTime(0.001, endTime);
-  oscillator.stop(endTime);
+  gain.gain.linearRampToValueAtTime(0.0001, context.currentTime + 0.1);
+  oscillator.stop(context.currentTime + 0.3);
 
   return null;
 };
