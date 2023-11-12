@@ -1,6 +1,7 @@
 import { notesWithOctaves, parseNoteAndOctave } from './notes';
 
 const notesToSemitones: Readonly<Record<Note, number>> = {
+  'B#': 0,
   C: 0,
   'C#': 1,
   Db: 1,
@@ -8,6 +9,8 @@ const notesToSemitones: Readonly<Record<Note, number>> = {
   'D#': 3,
   Eb: 3,
   E: 4,
+  'E#': 5,
+  Fb: 4,
   F: 5,
   'F#': 6,
   Gb: 6,
@@ -18,7 +21,12 @@ const notesToSemitones: Readonly<Record<Note, number>> = {
   'A#': 10,
   Bb: 10,
   B: 11,
+  Cb: 11,
 } as const;
+
+export const noteToSemitone = (note: Note): number => {
+  return notesToSemitones[note];
+};
 
 export const noteToMidiNumber = (note: NoteWithOctave): number => {
   const { note: noteName, octave } = parseNoteAndOctave(note);

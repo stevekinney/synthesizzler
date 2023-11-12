@@ -57,7 +57,9 @@ export const toNoteWithOctave = (
   return `${note}${octave}` as const;
 };
 
-export const parseNoteAndOctave = (noteWithOctave: NoteWithOctave) => {
+export const parseNoteAndOctave = (
+  noteWithOctave: NoteWithOctave,
+): { note: Note; octave: Octave } => {
   const note = noteWithOctave.slice(0, -1) as Note;
   const octave = parseInt(noteWithOctave.slice(-1), 10) as Octave;
   return { note, octave };
