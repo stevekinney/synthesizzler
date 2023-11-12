@@ -1,7 +1,6 @@
 export class Clock {
   public on: boolean = false;
   public currentBeat = 0;
-  public beats = 4;
   public beatsPerMinute = 90;
   public beatsPerMeasure = 4;
   public nextScheduledBeat: number | null = null;
@@ -50,6 +49,6 @@ export class Clock {
 
   private incrementBeat() {
     this.currentBeat++;
-    if (this.currentBeat > this.beats) this.currentBeat = 1;
+    if (this.currentBeat > this.beatsPerMeasure) this.currentBeat = 1;
   }
 }
