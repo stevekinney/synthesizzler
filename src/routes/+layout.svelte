@@ -24,6 +24,9 @@
       <li>
         <Link href="/metronome">Metronome</Link>
       </li>
+      <li>
+        <Link href="/analyzer">Analyzer</Link>
+      </li>
     </ul>
   </nav>
   <slot />
