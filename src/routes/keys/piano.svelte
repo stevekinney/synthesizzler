@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Synthesizer } from '../routes/keys/create-synthesizer';
+  import type { Synthesizer } from './create-synthesizer';
   import { isNote } from '$lib/notes';
   import { createEventDispatcher } from 'svelte';
 

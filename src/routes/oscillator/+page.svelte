@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Oscillator from '$components/oscillator.svelte';
+  import Oscillator from './oscillator.svelte';
 </script>
 
 <svelte:head>

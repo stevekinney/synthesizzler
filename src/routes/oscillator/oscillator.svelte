@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Select from './select.svelte';
-  import Slider from './slider.svelte';
-  import ToggleButton from './toggle-button.svelte';
+  import Select from '../../components/select.svelte';
+  import Slider from '../../components/slider.svelte';
+  import ToggleButton from '../../components/toggle-button.svelte';
 
   const context = new AudioContext();
   const volume = context.createGain();

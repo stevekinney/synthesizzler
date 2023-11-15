@@ -6,8 +6,8 @@
 
   const currentNotes = createSynthesizer(context);
 
-  import Keyboard from '$components/keyboard.svelte';
-  import Piano from '$components/piano.svelte';
+  import Keyboard from './keyboard.svelte';
+  import Piano from './piano.svelte';
 
   const pauseOnBlur = () => {
     currentNotes.clear();
