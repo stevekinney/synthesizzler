@@ -25,6 +25,9 @@ devDependencies:
   '@tailwindcss/nesting':
     specifier: 0.0.0-insiders.565cd3e
     version: 0.0.0-insiders.565cd3e(postcss@8.4.31)
+  '@types/w3c-web-serial':
+    specifier: ^1.0.6
+    version: 1.0.6
   '@types/webrtc':
     specifier: ^0.0.40
     version: 0.0.40
@@ -566,6 +569,10 @@ packages:
 
   /@types/semver@7.5.4:
     resolution: {integrity: sha512-MMzuxN3GdFwskAnb6fz0orFvhfqi752yjaXylr0Rp4oDg5H0Zn1IuyRhDVvYOwAXoJirx2xuS16I3WjxnAIHiQ==}
+    dev: true
+
+  /@types/w3c-web-serial@1.0.6:
+    resolution: {integrity: sha512-5IlDdQ2C56sCVwc7CUlqT9Axxw+0V/FbWRbErklYIzZ5mKL9s4l7epXHygn+4X7L2nmAPnVvRl55XUVo0760Rg==}
     dev: true
 
   /@types/webgl-ext@0.0.30:
