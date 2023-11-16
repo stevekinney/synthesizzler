@@ -22,6 +22,10 @@
   });
 </script>
 
+<svelte:head>
+  <title>Keyboard</title>
+</svelte:head>
+
 <div
   class="grid grid-cols-1 gap-10 xl:grid-rows-[3rem_auto] lg:grid-cols-[1fr_1fr]"
 >

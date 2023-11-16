@@ -46,8 +46,6 @@
     currentBeat = 0;
   };
 
-  console.log(sequence);
-
   function tick(beat: number) {
     currentBeat = beat;
     const currentStep = sequence[beat - 1];

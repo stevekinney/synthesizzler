@@ -28,11 +28,11 @@
         <td>{notes.join(' / ')}</td>
         <td>{midi}</td>
         <td>{frequency}</td>
-        <td
-          ><button on:click={() => playFrequency(context, frequency)}
-            >▶️ Play</button
-          ></td
-        >
+        <td>
+          <button on:click={() => playFrequency(context, frequency)}>
+            ▶️ Play
+          </button>
+        </td>
       </tr>
     {/each}
   </tbody>

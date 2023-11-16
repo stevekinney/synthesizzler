@@ -46,6 +46,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Metronome</title>
+</svelte:head>
+
 <div class="space-y-6">
   <dl>
     <dt>Playing</dt>

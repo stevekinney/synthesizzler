@@ -27,7 +27,7 @@
 
     const ctx = canvas?.getContext('2d');
 
-    if (ctx) drawWave(analyser, ctx);
+    if (ctx) draw(analyser, ctx);
   };
 
   const stop = () => {
@@ -43,7 +43,7 @@
     if (width) canvas.width = Math.min(width, window.innerWidth);
   };
 
-  function drawWave(analyser: AnalyserNode, ctx: CanvasRenderingContext2D) {
+  const draw = (analyser: AnalyserNode, ctx: CanvasRenderingContext2D) => {
     const buffer = new Float32Array(1024);
     const w = ctx.canvas.width;
 
@@ -65,7 +65,7 @@
 
       if (isPlaying) requestAnimationFrame(loop);
     })();
-  }
+  };
 
   let canvas: HTMLCanvasElement | null = null;
 
@@ -75,6 +75,10 @@
   $: if (oscillator) oscillator.frequency.value = frequency;
   $: if (canvas) resizeCanvas();
 </script>
+
+<svelte:head>
+  <title>Analyzer</title>
+</svelte:head>
 
 <svelte:window
   on:resize={() => {

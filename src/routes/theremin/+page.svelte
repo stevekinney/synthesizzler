@@ -120,21 +120,6 @@
 <div class="grid xl:grid-cols-2 gap-8" id="playground">
   <article class="space-y-4">
     <h2>Face Theremin</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis varius, nibh
-      ut ullamcorper tempus, ligula augue dignissim leo, sed tincidunt eros orci
-      ut nisi. Vestibulum eu nisl pretium, tincidunt turpis non, cursus mauris.
-      Aenean vestibulum sollicitudin tortor non porttitor. Quisque at erat
-      ullamcorper, ornare felis at, blandit dolor. Mauris ut dui vitae nunc
-      varius hendrerit eu non augue. Sed ligula eros, mattis nec arcu quis,
-      placerat tincidunt purus. Aliquam eget venenatis dolor, eget interdum leo.
-      Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-      ac turpis egestas. Praesent pretium vitae ante luctus laoreet. Sed
-      ultricies vitae metus a ultrices. Pellentesque id metus eget risus cursus
-      posuere. Mauris mollis dictum augue, in blandit augue aliquet molestie.
-      Donec dignissim, est nec sagittis eleifend, odio ex faucibus lorem, ac
-      gravida nisl urna in lorem.
-    </p>
     <div>
       <ToggleButton
         on="▶️ Play"
