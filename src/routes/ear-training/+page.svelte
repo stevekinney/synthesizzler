@@ -40,7 +40,7 @@
 </script>
 
 <div class="space-y-10">
-  <p class="text-center">
+  <p class="text-center bg-indigo-50 border-2 border-indigo-100 rounded-md p-4">
     Play the sound and try to guess what note you're hearing.
   </p>
 
@@ -48,16 +48,18 @@
     class="w-full bg-purple-400 border-purple-500 hover:bg-purple-500 hover:border-purple-600 active:bg-purple-600 active:border-purple-700 active:ring-purple-300 focus:ring-purple-200"
     on:click={play}
   >
-    Play
+    ▶️ Play
   </button>
 
   <p data-midi={targetMidi} class="text-center h-10 text-4xl">
     {message}
   </p>
 
-  <div class="flex gap-4 flex-wrap">
+  <div class="grid grid-cols-5 gap-4 flex-wrap">
     {#each validNotes as [midi, note]}
-      <button on:click={guess(midi, note[0])}>{note.join(' / ')}</button>
+      <button class="w-full" on:click={guess(midi, note[0])}
+        >{note.join(' / ')}</button
+      >
     {/each}
   </div>
 </div>

@@ -86,17 +86,17 @@
   mode.
 </p>
 
-<div class="snap-mandatory snap-y h-screen md:h-fit overflow-y-auto">
-  <div class="grid grid-flow-col md:gap-2 gap-1 snap-start snap-always">
+<div class="snap-mandatory snap-y h-screen md:h-fit w-full">
+  <div class="grid grid-flow-col justify-center gap-px snap-start snap-always">
     {#each sequence as step, s}
       <div
-        class="flex flex-col md:gap-2 gap-1 md:p-1 py-1 rounded"
+        class="flex flex-col gap-px md:p-1 py-1 rounded"
         class:bg-yellow-400={s + 1 === currentBeat}
       >
         {#each step as button, b}
           <button
             on:click={() => handleClick(s, b)}
-            class="sm:w-full rounded-none sm:border-2 border-0 p-px font-normal md:text-sm bg-purple-200 text-purple-700 border-purple-600 hover:bg-purple-300"
+            class="rounded-none sm:border-2 border-0 p-px font-normal md:text-sm bg-purple-200 text-purple-700 border-purple-600 hover:bg-purple-300 w-6 h-6"
             class:active={button.active}
           >
             {button.note}
