@@ -75,8 +75,16 @@
     off="Stop"
     condition={isPlaying}
     on:click={isPlaying ? stop : start}
+    class="w-full md:w-fit"
   />
 </div>
+
+<p
+  class="portrait:block hidden bg-yellow-50 border-2 rounded-md border-yellow-100 p-4 my-10"
+>
+  <strong>Pro Tip</strong>: You probably want to turn your phone to landscape
+  mode.
+</p>
 
 <div class="snap-mandatory snap-y h-screen md:h-fit overflow-y-auto">
   <div class="grid grid-flow-col md:gap-2 gap-1 snap-start snap-always">
@@ -88,7 +96,7 @@
         {#each step as button, b}
           <button
             on:click={() => handleClick(s, b)}
-            class="p-0 font-normal text-xs md:text-sm bg-purple-200 text-purple-700 border-purple-600 hover:bg-purple-300"
+            class="sm:w-full rounded-none sm:border-2 border-0 p-px font-normal md:text-sm bg-purple-200 text-purple-700 border-purple-600 hover:bg-purple-300"
             class:active={button.active}
           >
             {button.note}

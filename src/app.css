@@ -99,6 +99,6 @@
   }
 
   button {
-    @apply bg-cyan-500 border-2 border-cyan-500 py-2 px-4 rounded text-white font-semibold hover:bg-cyan-600 transition-colors duration-100 active:bg-cyan-700 focus:ring-cyan-200 disabled:bg-cyan-50 disabled:text-cyan-500 disabled:saturate-50 disabled:cursor-not-allowed;
+    @apply bg-cyan-500 border-2 border-cyan-500 py-2 px-4 rounded text-white font-semibold hover:bg-cyan-600 transition-colors duration-100 active:bg-cyan-700 focus:ring-cyan-200 disabled:bg-cyan-50 disabled:text-cyan-500 disabled:saturate-50 disabled:cursor-not-allowed w-full sm:w-fit;
   }
 }

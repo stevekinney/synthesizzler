@@ -14,6 +14,7 @@
   let userMedia: MediaStream | null;
   let video: HTMLVideoElement;
   let canvas: HTMLCanvasElement;
+  let container: HTMLElement;
 
   let width = 640;
   let height = 480;
@@ -54,9 +55,8 @@
   };
 
   const onLoad = () => {
-    const container = document.getElementById('playground');
-
     const aspectRatio = video.videoHeight / video.videoWidth;
+
     width = container
       ? Math.min(video.videoWidth, container.clientWidth)
       : video.videoWidth;
@@ -111,15 +111,37 @@
       faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
     }, 100);
   };
+
+  $: width = Math.min(container?.clientWidth, 640);
+  $: height = width * (3 / 4);
 </script>
 
 <svelte:head>
   <title>Face Theremin</title>
 </svelte:head>
 
-<div class="grid xl:grid-cols-2 gap-8" id="playground">
+<svelte:window
+  on:resize={() => (width = Math.min(container?.clientWidth, 640))}
+/>
+
+<div class="flex flex-col-reverse md:flex-row gap-8" bind:this={container}>
   <article class="space-y-4">
     <h2>Face Theremin</h2>
+    <p>
+      <strong>Instructions</strong>: Once you hit the
+      <span class="font-semibold">Play</span> button, the application will ask to
+      answer your camera and then play a frequency based on the location of your
+      face. Move your face around to change the pitch of the oscillator.
+    </p>
+    <p>
+      This application uses <a href="npm.im/face-api.js" target="_blank">
+        face-api.js
+      </a> for all of the face tracking goodness.
+    </p>
+    <p class="block sm:hidden p-4 bg-yellow-50 border-2 border-yellow-100">
+      <strong>Note</strong>: You might have some issues using this example on a
+      mobile phone.
+    </p>
     <div>
       <ToggleButton
         on="▶️ Play"
@@ -128,7 +150,7 @@
         on:click={userMedia ? stopVideo : startVideo}
       />
     </div>
-    <dl class="items-end" class:invisible={!userMedia}>
+    <dl class:hidden={!userMedia}>
       <dt>X</dt>
       <dd>{x && Math.round(x)}</dd>
       <dt>Y</dt>
@@ -139,7 +161,7 @@
   </article>
 
   <div
-    class="relative flex items-center justify-center bg-indigo-100 rounded-xl shadow-xl row-span-2 place-self-end mx-auto"
+    class="relative w-full flex-shrink-0 flex items-center justify-center bg-indigo-100 rounded-xl shadow-xl row-span-2 place-self-end mx-auto self-center"
     style="width: {width}px; height: {height}px;"
   >
     <p>Press the <strong>Play</strong> button to get started.</p>

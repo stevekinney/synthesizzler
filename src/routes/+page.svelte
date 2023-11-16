@@ -9,6 +9,13 @@
     <a href="https://temporal.io/" target="_blank">Temporal</a>.
   </p>
 
+  <p>
+    All of the code for these examples can be found in <a
+      href="https://github.com/stevekinney/synthesizzler"
+      target="_blank">this repository</a
+    >.
+  </p>
+
   <h2>Additional Resources</h2>
   <ul class="list-disc pl-4 space-y-2">
     <li>

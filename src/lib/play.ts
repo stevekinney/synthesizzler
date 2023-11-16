@@ -32,9 +32,9 @@ export const playFrequency = (
 export const playNote = (
   context: AudioContext,
   note: NoteWithOctave,
-  time: number = context.currentTime,
+  startTime: number = context.currentTime,
   options: PlayOptions = {},
 ) => {
   const frequency = getFrequency(note);
-  playFrequency(context, frequency, time, options);
+  playFrequency(context, frequency, startTime, options);
 };
