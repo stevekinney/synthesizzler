@@ -28,6 +28,18 @@
     return notes;
   });
 
+  const tick = (beat: number) => {
+    currentBeat = beat;
+    const currentStep = sequence[beat - 1];
+    for (const { active, note } of currentStep) {
+      if (active) {
+        playNote(context, note, context.currentTime, {
+          duration: clock.secondsPerBeat,
+        });
+      }
+    }
+  };
+
   const context = new AudioContext();
 
   const clock = new Clock(context, tick, {
@@ -46,23 +58,11 @@
     currentBeat = 0;
   };
 
-  function tick(beat: number) {
-    currentBeat = beat;
-    const currentStep = sequence[beat - 1];
-    for (const { active, note } of currentStep) {
-      if (active) {
-        playNote(context, note, context.currentTime, {
-          duration: clock.secondsPerBeat,
-        });
-      }
-    }
-  }
-
-  function handleClick(step: number, note: number) {
+  const handleClick = (step: number, note: number) => {
     sequence = produce(sequence, (draft) => {
       draft[step][note].active = !draft[step][note].active;
     });
-  }
+  };
 </script>
 
 <svelte:head>

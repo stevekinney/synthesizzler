@@ -13,7 +13,7 @@ export const orderOfFlats: Note[] = ['B', 'E', 'A', 'D', 'G', 'C', 'F'];
 const sharpOrder: Note[] = ['F#', 'C#', 'G#', 'D#', 'A#', 'E#', 'B#'];
 const flatOrder: Note[] = ['Bb', 'Eb', 'Ab', 'Db', 'Gb', 'Cb', 'Fb'];
 
-export function getSharpForNote(note: Note): Note {
+export const getSharpForNote = (note: Note): Note => {
   if (isNaturalNote(note)) {
     return note;
   }
@@ -25,9 +25,9 @@ export function getSharpForNote(note: Note): Note {
   }
 
   return note;
-}
+};
 
-export function getFlatForNote(note: Note): Note {
+export const getFlatForNote = (note: Note): Note => {
   if (isNaturalNote(note)) {
     return note;
   }
@@ -39,7 +39,7 @@ export function getFlatForNote(note: Note): Note {
   }
 
   return note;
-}
+};
 
 export const getAccidentalsForKey = (key: Note): Note[] => {
   let accidentals: Note[] = [];
