@@ -10,6 +10,12 @@
         <Link href="/oscillator">Oscillator</Link>
       </li>
       <li>
+        <Link href="/analyzer">Analyzer</Link>
+      </li>
+      <li>
+        <Link href="/notes">Notes</Link>
+      </li>
+      <li>
         <Link href="/keys">Keys</Link>
       </li>
       <li>
@@ -19,13 +25,7 @@
         <Link href="/step-sequencer">Sequencer</Link>
       </li>
       <li>
-        <Link href="/notes">Notes</Link>
-      </li>
-      <li>
         <Link href="/metronome">Metronome</Link>
-      </li>
-      <li>
-        <Link href="/analyzer">Analyzer</Link>
       </li>
     </ul>
   </nav>
