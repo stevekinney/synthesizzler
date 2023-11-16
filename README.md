@@ -1,38 +1,11 @@
-# create-svelte
+# Making Music with the Web Audio API
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Code and examples from Steve's talk at JSConf Colombia 2023.
 
-## Creating a project
+## Colophon
 
-If you're seeing this, you've probably already done this step. Congrats!
+The site that hosts these examples uses [SvelteKit](https://svelte.kit.dev) and is styled using [Tailwind CSS](https://tailwindcss.com). The face tracking for the **Face Theremin** project uses a library called [`face-api.js`](https://npm.im/face-api.js).
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Older Versions
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+This talk (and the examples included) are an updated version of a talk that you can find [here](https://github.com/stevekinney/making-music).
