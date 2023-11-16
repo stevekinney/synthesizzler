@@ -26,6 +26,7 @@
   const stop = () => {
     if (oscillator) {
       oscillator.stop();
+      oscillator.disconnect();
       oscillator = null;
     }
   };
