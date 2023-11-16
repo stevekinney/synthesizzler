@@ -9,14 +9,8 @@
       "request": "launch",
       "name": "Launch Program",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": [
-        "dev",
-        "--port",
-        "4444"
-      ],
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      "runtimeArgs": ["dev", "--port", "4444"],
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
