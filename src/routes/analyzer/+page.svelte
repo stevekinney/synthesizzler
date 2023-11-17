@@ -1,6 +1,7 @@
 <script lang="ts">
   import Slider from '$components/slider.svelte';
   import ToggleButton from '$components/toggle-button.svelte';
+  import { onDestroy } from 'svelte';
 
   const context = new AudioContext();
   const volume = context.createGain();
@@ -74,6 +75,8 @@
   $: if (oscillator) oscillator.type = waveType;
   $: if (oscillator) oscillator.frequency.value = frequency;
   $: if (canvas) resizeCanvas();
+
+  onDestroy(stop);
 </script>
 
 <svelte:head>

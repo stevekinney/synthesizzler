@@ -22,18 +22,18 @@ void loop() {
   // Check if any button is pressed
   // If yes, send a corresponding message to the serial monitor
   if (buttonState1 == HIGH) {
-    Serial.println("Button 1 Pressed");
+    Serial.println(1);
     // Delay to avoid bouncing issues
     delay(200);
   }
 
   if (buttonState2 == HIGH) {
-    Serial.println("Button 2 Pressed");
+    Serial.println(2);
     delay(200);
   }
 
   if (buttonState3 == HIGH) {
-    Serial.println("Button 3 Pressed");
+    Serial.println(3);
     delay(200);
   }
 }

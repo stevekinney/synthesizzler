@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onDestroy } from 'svelte';
   import Select from '../../components/select.svelte';
   import Slider from '../../components/slider.svelte';
   import ToggleButton from '../../components/toggle-button.svelte';
@@ -42,6 +43,8 @@
     oscillator.connect(volume);
     oscillator.start();
   };
+
+  onDestroy(stop);
 </script>
 
 <div class="space-y-4">

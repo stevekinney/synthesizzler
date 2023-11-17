@@ -39,7 +39,21 @@
       <li>
         <Link href="/step-sequencer">Sequencer</Link>
       </li>
+      <li>
+        <Link href="/serial">Web Serial API</Link>
+      </li>
     </ul>
   </nav>
   <slot />
+  <footer class="flex gap-4 justify-end mt-10">
+    <a
+      href="https://speakerdeck.com/stevekinney/making-music-with-the-web-audio-api-jsconf-colombia-2023"
+      target="_blank"
+    >
+      Slides
+    </a>
+    <a href="https://github.com/stevekinney/synthesizzler" target="_blank">
+      Code
+    </a>
+  </footer>
 </div>

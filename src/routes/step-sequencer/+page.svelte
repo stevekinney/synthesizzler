@@ -96,7 +96,7 @@
         {#each step as button, b}
           <button
             on:click={() => handleClick(s, b)}
-            class="rounded-none sm:border-2 border-0 p-px font-normal md:text-sm bg-purple-200 text-purple-700 border-purple-600 hover:bg-purple-300 w-6 h-6"
+            class="rounded-none sm:border-2 border-0 p-px font-normal md:text-sm bg-purple-200 text-purple-700 border-purple-600 hover:bg-purple-300 w-6 h-6 md:w-10 md:h-10 lg:w-16 lg:h-16"
             class:active={button.active}
           >
             {button.note}
